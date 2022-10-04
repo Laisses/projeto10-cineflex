@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Footer } from "./Footer";
 
 const MovieSession = () => {
     return (
@@ -12,18 +13,15 @@ const MovieSession = () => {
 
 export const Sessions = () => {
     return (
-        <SessionContainer>
+        <section>
             <Title>Selecione o horário</Title>
             <MovieSession />
             <MovieSession />       
-            <div>Div esquisita com o filme dentro</div>
-        </SessionContainer>
+            <Footer />
+        </section>
     );
 };
 
-const SessionContainer = styled.section`
-    margin-left: 23px;
-`;
 const Title = styled.h2`    
     font-size: 24px;
     margin: 55px auto;
@@ -31,6 +29,7 @@ const Title = styled.h2`
 `;
 const MovieContainer = styled.div`
     margin-bottom: 25px;
+    margin-left: 24px;
 `;
 const P = styled.p`
     font-size: 20px;
