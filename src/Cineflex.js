@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { GlobalStyle } from "./GlobalStyle";
 import { Header } from "./Header";
 import { Movies } from "./Movies";
-import { Session } from "./Session";
+import { Sessions } from "./Sessions";
 import { Seats } from "./Seats";
 import { Order } from "./Order";
 
@@ -11,9 +11,9 @@ export const Cineflex = () => {
         <Container>
             <GlobalStyle />
             <Header />
-            <Movies />
-            {/* <Session />
-            <Seats />
+            {/* <Movies /> */}
+            <Sessions />
+            {/* <Seats />
             <Order /> */}
         </Container>        
     );
@@ -21,4 +21,5 @@ export const Cineflex = () => {
 
 const Container = styled.div`
     font-family: 'Roboto', sans-serif;
+    color: #293845;
 `;
