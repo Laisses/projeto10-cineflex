@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 export const Header = () => {
     return (
-        <Title>
+        <AppTitle>
              <h1>Cineflex</h1>   
-        </Title>
+        </AppTitle>
     );
 };
 
-const Title = styled.div`
+const AppTitle = styled.div`
     width: 100%;
     height: 67px;
     background-color: #c3cfd9;
