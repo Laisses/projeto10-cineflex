@@ -18,7 +18,7 @@ export const Cineflex = () => {
         <Container>
             <GlobalStyle />
             <Header />
-            <Movies />
+            <Movies setState={setState}/>
             {/* <Sessions /> 
             <Seats />
             <Order /> */}
