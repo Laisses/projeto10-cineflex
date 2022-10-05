@@ -38,6 +38,7 @@ const Button = styled.button`
     width: 83px;
     height: 43px;
     font-size: 18px;
+    text-align: center;
     margin-top: 22px;
     margin-right: 8px;
     color: #ffffff;

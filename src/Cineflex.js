@@ -12,10 +12,10 @@ export const Cineflex = () => {
             <GlobalStyle />
             <Header />
             {/* <Movies /> */}
-            <Sessions />
-            {/* <Seats />
-            <Order /> */}
-        </Container>        
+            {/* <Sessions /> */}
+            <Seats />
+            {/* <Order /> */}
+        </Container>
     );
 }
 
