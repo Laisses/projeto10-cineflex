@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Footer } from "./Footer";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -20,7 +19,7 @@ const SEAT_STATUS = {
 };
 
 export const Seats = () => {
-    const [seats, setSeats] = useState(undefined);
+    const [seatsMap, setSeatsMap] = useState(undefined);
     const [error, setError] = useState(false);
     const [title, setTitle] = useState("");
     const [image, setImage] = useState("");
@@ -34,11 +33,20 @@ export const Seats = () => {
     useEffect(() => {
         axios.get(URL)
             .then(res => {
-                console.log(res.data)
+                console.log(res.data.seats)
+                setSeatsMap(res.data.seats)
+                setTitle(res.data.movie.title);
+                setImage(res.data.movie.posterURL);
+                setTime(res.data.name);
+                setDay(res.data.day.weekday);
+
             })
+            .catch(_err => {
+                setError(true);
+            }) 
     }, [URL]);
 
-    if (!error && seats === undefined) {
+    if (!error && seatsMap === undefined) {
         return <div>Carregando...</div>;
     }
 
@@ -46,7 +54,7 @@ export const Seats = () => {
         <SeatsContainer>
             <Title>Selecione o(s) assento(s)</Title>
             <SeatsChartContainer>
-                {seats.map(seat => <Seat key={seat} color={SEAT_STATUS}><div>{seat}</div></Seat>)}
+                {seatsMap.map(s => <Seat color={SEAT_STATUS}><div>{s.name}</div></Seat>)}
             </SeatsChartContainer>
             <SeatContainer>
                 <Availability>
@@ -69,7 +77,15 @@ export const Seats = () => {
                 <input type="text" id="cpf" placeholder="Digite seu CPF..." />
             </FormContainer>
             <Button>Reservar assento(s)</Button>
-            <Footer />
+            <FooterContainer>
+            <Movie>
+                <img src={image} alt={`Pôster do filme ${title}`}/>                    
+            </Movie>
+            <MovieTitle>
+                <p>{title}</p>                
+                <p>{`${day} - ${time}`}</p>
+            </MovieTitle>
+        </FooterContainer>
         </SeatsContainer>
     );
 };
@@ -172,4 +188,43 @@ const FormContainer = styled.div`
 `;
 
 
+const FooterContainer = styled.footer`
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 117px;
+    background-color: #dfe6ed;
+    border-top: 1px solid #9eadba;
+   /*  position: fixed;
+    bottom: 0;
+    right: 0; */
+    margin-top: 30px;
+    margin-bottom: 500px;
+`;
 
+const Movie = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 89px;
+    margin-left: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    img {
+        width: 48px;
+        height: 72px;
+    }
+`;
+
+const MovieTitle = styled.h3`
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: 14px;
+    color: #293845;
+    p {
+        font-size: 26px;
+        line-height: 30px;
+    }
+`;
