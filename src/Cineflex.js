@@ -1,7 +1,6 @@
-import { useState } from "react";
+/* import { useState } from "react"; */
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
-import { GlobalStyle } from "./GlobalStyle";
 import { Header } from "./Header";
 import { Movies } from "./Movies";
 import { Sessions } from "./Sessions";
@@ -9,20 +8,18 @@ import { Seats } from "./Seats";
 import { Order } from "./Order";
 
 export const Cineflex = () => {
-    const initialState = {
-        movieId: null,
-    };
-
-    const [state, setState] = useState(initialState);
 
     return (
         <Container>
-            <GlobalStyle />
-            <Header />
-            <Movies setState={setState}/>
-            {/* <Sessions /> 
-            <Seats />
-            <Order /> */}
+            <BrowserRouter>
+                <Header />
+                <Routes>
+                    <Route path="/" element={<Movies />} />
+                    <Route path="/filme/37" element={<Sessions />} />
+                    <Route path="/sessao/240" element={<Seats />} />
+                    <Route path="/sucesso" element={<Order />} />
+                </Routes>
+            </BrowserRouter>
         </Container>
     );
 }
