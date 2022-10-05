@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import { GlobalStyle } from "./GlobalStyle";
 import { Header } from "./Header";
