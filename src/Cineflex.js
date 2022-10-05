@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { GlobalStyle } from "./GlobalStyle";
 import { Header } from "./Header";
@@ -7,14 +8,20 @@ import { Seats } from "./Seats";
 import { Order } from "./Order";
 
 export const Cineflex = () => {
+    const initialState = {
+        movieId: null,
+    };
+
+    const [state, setState] = useState(initialState);
+
     return (
         <Container>
             <GlobalStyle />
             <Header />
-            {/* <Movies />
-            <Sessions /> 
-            <Seats /> */}
-            <Order />
+            <Movies />
+            {/* <Sessions /> 
+            <Seats />
+            <Order /> */}
         </Container>
     );
 }
