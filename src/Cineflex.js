@@ -16,7 +16,7 @@ export const Cineflex = () => {
                 <Routes>
                     <Route path="/" element={<Movies />} />
                     <Route path="/filme/:movieId" element={<Sessions />} />
-                    <Route path="/sessao/240" element={<Seats />} />
+                    <Route path="/sessao/:sessionId" element={<Seats />} />
                     <Route path="/sucesso" element={<Order />} />
                 </Routes>
             </BrowserRouter>

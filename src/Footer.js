@@ -38,15 +38,16 @@ const Movie = styled.div`
     margin-left: 10px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
-    div {
+    img {
         width: 48px;
         height: 72px;
-        background-color: gray;
     }
 `;
 
 const MovieTitle = styled.h3`
     margin-left: 14px;
     color: #293845;
-    font-size: 26px;
+    p {
+        font-size: 26px;
+    }
 `;

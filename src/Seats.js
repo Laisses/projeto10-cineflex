@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { Footer } from "./Footer";
-
-const seatsChart = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const SEAT_STATUS = {
     available: {
@@ -19,11 +20,33 @@ const SEAT_STATUS = {
 };
 
 export const Seats = () => {
+    const [seats, setSeats] = useState(undefined);
+    const [error, setError] = useState(false);
+    const [title, setTitle] = useState("");
+    const [image, setImage] = useState("");
+    const [time, setTime] = useState("");
+    const [day, setDay] = useState("");
+    
+    const { sessionId } = useParams();
+
+    const URL = `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${sessionId}/seats`;
+
+    useEffect(() => {
+        axios.get(URL)
+            .then(res => {
+                console.log(res.data)
+            })
+    }, [URL]);
+
+    if (!error && seats === undefined) {
+        return <div>Carregando...</div>;
+    }
+
     return (
         <SeatsContainer>
             <Title>Selecione o(s) assento(s)</Title>
             <SeatsChartContainer>
-                {seatsChart.map(seat => <Seat key={seat} color={SEAT_STATUS}><div>{seat}</div></Seat>)}
+                {seats.map(seat => <Seat key={seat} color={SEAT_STATUS}><div>{seat}</div></Seat>)}
             </SeatsChartContainer>
             <SeatContainer>
                 <Availability>
@@ -147,3 +170,6 @@ const FormContainer = styled.div`
         }
     }
 `;
+
+
+
