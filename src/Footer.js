@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export const Footer = () => {
+export const Footer = ({title}) => {
     return (
         <FooterContainer>
             <Movie>
                 <div></div>                    
             </Movie>
             <MovieTitle>
-                <p>Título do Filme</p>
+                <p>{title}</p>
                 {/*colcar um if aqui para aparecer ou não o horário do filme */ }
                 <p>Horário escolhido</p>
             </MovieTitle>

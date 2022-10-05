@@ -14,7 +14,7 @@ export const Movies = () => {
             .then(res => {
                 setMovies(res.data);
             })
-            .catch(err => {
+            .catch(_err => {
                 setError(true);
             })
     }, []);

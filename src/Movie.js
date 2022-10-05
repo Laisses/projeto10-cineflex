@@ -1,10 +1,13 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export const Movie = ({id, title, image}) => {
     
+    const navigate = useNavigate();
+
     return (
         <Li>
-            <img src={image} alt={`Pôster do filme ${title}`} />
+            <img src={image} alt={`Pôster do filme ${title}`} onClick={() => navigate(`/filme/${id}`)}/>
         </Li>
     );
 }
