@@ -210,10 +210,10 @@ const Movie = styled.div`
     }
 `;
 
-const MovieTitle = styled.h3`
+const MovieTitle = styled.div`
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    flex-direction: column;
+    align-items: left;
     margin-left: 14px;
     color: #293845;
     p {
