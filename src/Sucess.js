@@ -1,10 +1,20 @@
 import styled from "styled-components";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const Sucess = () => {
-
+    
     const location = useLocation();
-    console.log(location);
+    const navigate = useNavigate();
+    console.log(location.state);
+
+    const order = {
+        title: location.state.tile,
+        day: location.state.day,
+        time: location.state.time,
+        seats: location.state.seats,
+        name: location.state.name,
+        cpf: location.state.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"),
+    }
 
     return (
         <OrderContainer>
@@ -15,20 +25,19 @@ export const Sucess = () => {
             </SucessMessage>
             <Info>
                 <InfoTitle>Filme e sessão</InfoTitle>
-                <Paragraph>Enola Holmes</Paragraph>
-                <Paragraph>24/06/2021 15:00</Paragraph>
+                <Paragraph>{order.title}</Paragraph>
+                <Paragraph>{order.day} {order.time}</Paragraph>
             </Info> 
             <Info>
                 <InfoTitle>Ingressos</InfoTitle>
-                <Paragraph>Assento 15</Paragraph>
-                <Paragraph>Assento 16</Paragraph>
+                {order.seats.map(s => <Paragraph>Assento {s}</Paragraph>)}
             </Info>
             <Info>
                 <InfoTitle>Comprador</InfoTitle>
-                <Paragraph>Nome: João da Silva Sauro</Paragraph>
-                <Paragraph>CPF: 123.456.789-10</Paragraph>
+                <Paragraph>{order.name}</Paragraph>
+                <Paragraph>{order.cpf}</Paragraph>
             </Info>
-            <Button>Voltar pra Home</Button>
+            <Button onClick={() => navigate("/")}>Voltar pra Home</Button>
         </OrderContainer>
     );
 };
@@ -62,6 +71,7 @@ const InfoTitle = styled.h3`
 const Paragraph = styled.p`
     font-size: 22px;
     color: #293845;
+    line-height: 26px;
 `;
 
 const Button = styled.button`
@@ -76,4 +86,6 @@ const Button = styled.button`
     background-color: #e8833a;
     border: none;
     border-radius: 3px;
+
+    margin-bottom: 600px;
 `;

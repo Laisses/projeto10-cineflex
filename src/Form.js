@@ -6,7 +6,6 @@ import styled from "styled-components";
 export const Form = ({ seats, title, day, time }) => {
     const [name, setName] = useState("");
     const [cpf, setCpf] = useState("");
-    const [order, setOrder] = useState(undefined);
     const [loading, setLoading] = useState(false);
     
     const navigate = useNavigate();
@@ -41,26 +40,21 @@ export const Form = ({ seats, title, day, time }) => {
         const URL = "https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many";
 
         if (validateName(name) && validateCPF(cpf) && validateSeats(seats)) {
-            const newOrder = {
+            const order = {
                 ids: seats.map(s => s.id),
                 name,
                 cpf,
             };
-
-            console.log(newOrder.ids)
-
-            setOrder(newOrder);
+           
             setLoading(true);
 
-            axios.post(URL, newOrder)
+            axios.post(URL, order)
                 .then(res => {
-                    console.log("deu bom")
-                    console.log(res.data)
                     navigate("/sucesso", {
                         state: {
                             seats: seats.map(s => s.name),
-                            name: newOrder.name,
-                            cpf: newOrder.cpf,
+                            name: order.name,
+                            cpf: order.cpf,
                             title,
                             day,
                             time,
