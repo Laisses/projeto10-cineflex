@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Form } from "./Form";
 
 const SEAT_STATUS = {
     available: {
@@ -39,7 +40,6 @@ export const Seats = () => {
                 setImage(res.data.movie.posterURL);
                 setTime(res.data.name);
                 setDay(res.data.day.weekday);
-
             })
             .catch(_err => {
                 setError(true);
@@ -70,7 +70,7 @@ export const Seats = () => {
         } else {
             return SEAT_STATUS.selected;
         }
-    }
+    };    
     
     return (
         <SeatsContainer>
@@ -99,13 +99,7 @@ export const Seats = () => {
                     <p>Indisponível</p>
                 </Div>
             </SeatChart>
-            <Form>
-                <label htmlFor="nome">Nome do comprador:</label>
-                <input type="text" id="nome" placeholder="Digite seu nome..." />
-                <label htmlFor="cpf">CPF do comprador:</label>
-                <input type="text" id="cpf" placeholder="Digite seu CPF..." />
-                <Button>Reservar assento(s)</Button>
-            </Form>            
+            <Form seatsId={selected}/>
             <Footer>
                 <Movie>
                     <img src={image} alt={`Pôster do filme ${title}`} />
@@ -176,44 +170,6 @@ const SeatColor = styled.div`
     background-color: ${({ color }) => color.backgroundColor};
     border: ${({ color }) => color.border};
     border-radius: 17px;
-`;
-
-const Button = styled.button`
-    align-self: center;
-    width: 225px;
-    height: 42px;
-    font-size: 18px;
-    text-align: center;
-    margin-top: 57px;
-    margin-right: 8px;
-    color: #ffffff;
-    background-color: #e8833a;
-    border: none;
-    border-radius: 3px;
-`;
-
-const Form = styled.div`
-    display: flex;
-    flex-direction: column;
-    label {        
-        margin-left: 24px;
-        font-size: 18px;
-        color: #293845;
-        margin-top: 12px;
-    }
-    input {        
-        margin-left: 24px;
-        width: 327px;
-        height: 51px;
-        border: 1px solid #d5d5d5;
-        border-radius: 3px;
-        font-size: 18px;
-        padding-left: 18px;
-        &::placeholder {
-            font-style: italic;
-            color: #afafaf;            
-        }
-    }
 `;
 
 const Footer = styled.footer`
