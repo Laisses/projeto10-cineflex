@@ -25,7 +25,8 @@ export const Seats = () => {
     const [image, setImage] = useState("");
     const [time, setTime] = useState("");
     const [day, setDay] = useState("");
-    
+    const [selected, setSelected] = useState([]);
+
     const { sessionId } = useParams();
 
     const URL = `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${sessionId}/seats`;
@@ -33,7 +34,6 @@ export const Seats = () => {
     useEffect(() => {
         axios.get(URL)
             .then(res => {
-                console.log(res.data.seats)
                 setSeatsMap(res.data.seats)
                 setTitle(res.data.movie.title);
                 setImage(res.data.movie.posterURL);
@@ -43,18 +43,47 @@ export const Seats = () => {
             })
             .catch(_err => {
                 setError(true);
-            }) 
+            })
     }, [URL]);
 
     if (!error && seatsMap === undefined) {
         return <div>Carregando...</div>;
     }
 
+    const handleSeat = (seat) => {
+        if (seat.isAvailable) {
+            if (!selected.includes(seat.id)) {
+                setSelected([...selected, seat.id]);
+            } else {
+                setSelected(selected.filter(s => s !== seat.id));
+            }
+        } else {
+            alert("Esse assento não está disponível");
+        }        
+    };
+
+    const chooseColor = (seat) => {
+        if(!seat.isAvailable) {
+            return SEAT_STATUS.unavailable;
+        } else if (seat.isAvailable && !selected.includes(seat.id)) {
+            return SEAT_STATUS.available;
+        } else {
+            return SEAT_STATUS.selected;
+        }
+    }
+    
     return (
         <SeatsContainer>
             <Title>Selecione o(s) assento(s)</Title>
             <SeatsChartContainer>
-                {seatsMap.map(s => <Seat color={SEAT_STATUS}><div>{s.name}</div></Seat>)}
+                {seatsMap.map(s =>
+                    <Seat
+                        key={s.id}
+                        onClick={() => handleSeat(s)}
+                        color={chooseColor(s)}>
+                        <div>{s.name}</div>
+                    </Seat>
+                )}
             </SeatsChartContainer>
             <SeatContainer>
                 <Availability>
@@ -62,11 +91,11 @@ export const Seats = () => {
                     <p>Selecionado</p>
                 </Availability>
                 <Availability>
-                    <SeatColor color={SEAT_STATUS.unavailable} />
+                    <SeatColor color={SEAT_STATUS.available} />
                     <p>Disponível</p>
                 </Availability>
                 <Availability>
-                    <SeatColor color={SEAT_STATUS.available} />
+                    <SeatColor color={SEAT_STATUS.unavailable} />
                     <p>Indisponível</p>
                 </Availability>
             </SeatContainer>
@@ -75,17 +104,17 @@ export const Seats = () => {
                 <input type="text" id="nome" placeholder="Digite seu nome..." />
                 <label htmlFor="cpf">CPF do comprador:</label>
                 <input type="text" id="cpf" placeholder="Digite seu CPF..." />
-            </FormContainer>
-            <Button>Reservar assento(s)</Button>
+                <Button>Reservar assento(s)</Button>
+            </FormContainer>            
             <FooterContainer>
-            <Movie>
-                <img src={image} alt={`Pôster do filme ${title}`}/>                    
-            </Movie>
-            <MovieTitle>
-                <p>{title}</p>                
-                <p>{`${day} - ${time}`}</p>
-            </MovieTitle>
-        </FooterContainer>
+                <Movie>
+                    <img src={image} alt={`Pôster do filme ${title}`} />
+                </Movie>
+                <MovieTitle>
+                    <p>{title}</p>
+                    <p>{`${day} - ${time}`}</p>
+                </MovieTitle>
+            </FooterContainer>
         </SeatsContainer>
     );
 };
@@ -116,10 +145,9 @@ const Seat = styled.li`
     width: 27px;
     height: 27px;
     margin: 10px 4px;    
-    background-color: ${({ color }) => color.available.backgroundColor};
-    border: ${({ color }) => color.available.border};
+    background-color: ${({ color }) => color.backgroundColor};
+    border: ${({ color }) => color.border};
     border-radius: 12px;
-    cursor: pointer;
     div{
         text-align: center;
         font-size: 11px;
@@ -167,13 +195,14 @@ const Button = styled.button`
 const FormContainer = styled.div`
     display: flex;
     flex-direction: column;
-    margin-left: 24px;
-    label {
+    label {        
+        margin-left: 24px;
         font-size: 18px;
         color: #293845;
         margin-top: 12px;
     }
-    input {
+    input {        
+        margin-left: 24px;
         width: 327px;
         height: 51px;
         border: 1px solid #d5d5d5;
@@ -186,7 +215,6 @@ const FormContainer = styled.div`
         }
     }
 `;
-
 
 const FooterContainer = styled.footer`
     display: flex;
