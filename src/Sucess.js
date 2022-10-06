@@ -8,7 +8,7 @@ export const Sucess = () => {
     console.log(location.state);
 
     const order = {
-        title: location.state.tile,
+        title: location.state.title,
         day: location.state.day,
         time: location.state.time,
         seats: location.state.seats,
@@ -30,14 +30,17 @@ export const Sucess = () => {
             </Info> 
             <Info>
                 <InfoTitle>Ingressos</InfoTitle>
-                {order.seats.map(s => <Paragraph>Assento {s}</Paragraph>)}
+                {order.seats.map(s => <Paragraph key={s}>Assento {s}</Paragraph>)}
             </Info>
             <Info>
                 <InfoTitle>Comprador</InfoTitle>
                 <Paragraph>{order.name}</Paragraph>
                 <Paragraph>{order.cpf}</Paragraph>
             </Info>
-            <Button onClick={() => navigate("/")}>Voltar pra Home</Button>
+            <Button onClick={() => {
+                navigate("/")
+                window.location.reload();
+            }}>Voltar pra Home</Button>
         </OrderContainer>
     );
 };

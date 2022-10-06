@@ -36,6 +36,7 @@ export const Seats = () => {
     useEffect(() => {
         axios.get(URL)
             .then(res => {
+                console.log(res.data)
                 setSeatsMap(res.data.seats)
                 setTitle(res.data.movie.title);
                 setImage(res.data.movie.posterURL);
