@@ -26,6 +26,7 @@ export const Seats = () => {
     const [image, setImage] = useState("");
     const [time, setTime] = useState("");
     const [day, setDay] = useState("");
+    const [weekday, setWeekday] = useState("");
     const [selected, setSelected] = useState([]);
 
     const { sessionId } = useParams();
@@ -39,7 +40,8 @@ export const Seats = () => {
                 setTitle(res.data.movie.title);
                 setImage(res.data.movie.posterURL);
                 setTime(res.data.name);
-                setDay(res.data.day.weekday);
+                setDay(res.data.day.date);
+                setWeekday(res.data.day.weekday);
             })
             .catch(_err => {
                 setError(true);
@@ -52,26 +54,26 @@ export const Seats = () => {
 
     const handleSeat = (seat) => {
         if (seat.isAvailable) {
-            if (!selected.includes(seat.id)) {
-                setSelected([...selected, seat.id]);
+            if (!selected.includes(seat)) {
+                setSelected([...selected, seat]);
             } else {
-                setSelected(selected.filter(s => s !== seat.id));
+                setSelected(selected.filter(s => s !== seat));
             }
         } else {
             alert("Esse assento não está disponível");
-        }        
+        }
     };
 
     const chooseColor = (seat) => {
-        if(!seat.isAvailable) {
+        if (!seat.isAvailable) {
             return SEAT_STATUS.unavailable;
-        } else if (seat.isAvailable && !selected.includes(seat.id)) {
+        } else if (seat.isAvailable && !selected.includes(seat)) {
             return SEAT_STATUS.available;
         } else {
             return SEAT_STATUS.selected;
         }
-    };    
-    
+    };
+
     return (
         <SeatsContainer>
             <Title>Selecione o(s) assento(s)</Title>
@@ -99,14 +101,19 @@ export const Seats = () => {
                     <p>Indisponível</p>
                 </Div>
             </SeatChart>
-            <Form seatsId={selected}/>
+            <Form
+                seats={selected}
+                title={title}
+                day={day}
+                time={time}
+            />
             <Footer>
                 <Movie>
                     <img src={image} alt={`Pôster do filme ${title}`} />
                 </Movie>
                 <MovieTitle>
                     <p>{title}</p>
-                    <p>{`${day} - ${time}`}</p>
+                    <p>{`${weekday} - ${time}`}</p>
                 </MovieTitle>
             </Footer>
         </SeatsContainer>
