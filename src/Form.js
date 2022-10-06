@@ -1,49 +1,61 @@
+import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
 
-export const Form = ({seatsId}) => {
+export const Form = ({ seatsId }) => {
     const [name, setName] = useState("");
     const [cpf, setCpf] = useState("");
+    const [order, setOrder] = useState(undefined);
+    const [error, setError] = useState(false);
+    console.log(order)
 
     const validateName = name => {
         if (name.length < 3) {
             alert("O nome deve ter pelo menos 3 letras");
             return false;
-        } else {
-            return true;
         }
+        return true;
     };
-    
+
     const validateCPF = cpf => {
         if (cpf.length !== 11) {
             alert("O CPF tem é composto por 11 números");
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     const validateSeats = seats => {
         if (seats.length < 1) {
             alert("Você deve escolher pelo menos um assento");
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
-                
+
+        const URL = "https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many";
+
         if (validateName(name) && validateCPF(cpf) && validateSeats(seatsId)) {
-            const order = {
-                ids: [...seatsId],
+            const newOrder = {
+                ids: seatsId,
                 name,
                 cpf
             };
-            console.log(order)
-        } 
-        
+
+            setOrder(newOrder);
+
+            axios.post(URL, newOrder)
+                .then(res => {
+                    console.log("deu bom")
+                    console.log(res.data)
+                })
+                .catch(_err => {
+                    console.log("deu ruim");
+                })
+        }
     };
 
     return (
