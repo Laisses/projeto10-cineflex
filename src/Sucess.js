@@ -5,7 +5,6 @@ export const Sucess = () => {
     
     const location = useLocation();
     const navigate = useNavigate();
-    console.log(location.state);
 
     const order = {
         title: location.state.title,

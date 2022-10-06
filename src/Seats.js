@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Form } from "./Form";
@@ -30,14 +30,14 @@ export const Seats = () => {
     const [selected, setSelected] = useState([]);
 
     const { sessionId } = useParams();
+    const navigate = useNavigate();
 
     const URL = `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${sessionId}/seats`;
 
     useEffect(() => {
         axios.get(URL)
             .then(res => {
-                console.log(res.data)
-                setSeatsMap(res.data.seats)
+                setSeatsMap(res.data.seats);
                 setTitle(res.data.movie.title);
                 setImage(res.data.movie.posterURL);
                 setTime(res.data.name);
@@ -117,7 +117,7 @@ export const Seats = () => {
                     <p>{`${weekday} - ${time}`}</p>
                 </MovieTitle>
             </Footer>
-            <ButtonHome>Voltar</ButtonHome>
+            <ButtonBack onClick={() => navigate(-1)}>Voltar</ButtonBack>
         </SeatsContainer>
     );
 };
@@ -222,7 +222,7 @@ const MovieTitle = styled.h3`
     }
 `;
 
-const ButtonHome = styled.button`
+const ButtonBack = styled.button`
     width: 83px;
     height: 43px;
     font-size: 18px;

@@ -3,15 +3,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const MovieSession = ({ weekday, date, showtimes, sessionId }) => {
+const MovieSession = ({ weekday, date, showtimes }) => {
     const navigate = useNavigate();
-
+    
     return (
         <>
             <P>{weekday} - {date}</P>
             {showtimes.map(s => <Button
                 key={s.id}
-                onClick={() => navigate(`/sessao/${sessionId}`)}
+                onClick={() => navigate(`/sessao/${s.id}`)}
             >
                 {s.name}
             </Button>)}
@@ -25,13 +25,13 @@ export const Sessions = () => {
     const [title, setTitle] = useState("");
     const [image, setImage] = useState("");
     const { movieId } = useParams();
+    const navigate = useNavigate();
 
     const URL = `https://mock-api.driven.com.br/api/v5/cineflex/movies/${movieId}/showtimes`;
 
     useEffect(() => {
         axios.get(URL)
             .then(res => {
-                console.log(res.data.days);
                 setTitle(res.data.title);
                 setImage(res.data.posterURL);
                 setSessions(res.data.days);
@@ -51,7 +51,6 @@ export const Sessions = () => {
             <MovieContainer>
                 {sessions.map(s => <MovieSession
                     key={s.id}
-                    sessionId={movieId}
                     weekday={s.weekday}
                     date={s.date}
                     showtimes={s.showtimes}
@@ -65,7 +64,7 @@ export const Sessions = () => {
                     <p>{title}</p>                  
                 </MovieTitle>
             </FooterContainer>
-            <ButtonHome>Voltar</ButtonHome>
+            <ButtonHome onClick={() => navigate("/")}>Voltar</ButtonHome>
         </section>
     );
 };

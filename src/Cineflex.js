@@ -10,8 +10,8 @@ export const Cineflex = () => {
 
     return (
         <Container>
+            <Header />
             <BrowserRouter>
-                <Header />
                 <Routes>
                     <Route path="/" element={<Movies />} />
                     <Route path="/filme/:movieId" element={<Sessions />} />
