@@ -117,6 +117,7 @@ export const Seats = () => {
                     <p>{`${weekday} - ${time}`}</p>
                 </MovieTitle>
             </Footer>
+            <ButtonHome>Voltar</ButtonHome>
         </SeatsContainer>
     );
 };
@@ -219,4 +220,20 @@ const MovieTitle = styled.h3`
         font-size: 26px;
         line-height: 30px;
     }
+`;
+
+const ButtonHome = styled.button`
+    width: 83px;
+    height: 43px;
+    font-size: 18px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #393A73;
+    border: none;
+    border-radius: 3px;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 10px;
+    left: 0;
+    top: 0;
 `;

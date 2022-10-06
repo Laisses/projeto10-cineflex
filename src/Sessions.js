@@ -31,7 +31,8 @@ export const Sessions = () => {
     useEffect(() => {
         axios.get(URL)
             .then(res => {
-                setTitle(res.data.title)
+                console.log(res.data.days);
+                setTitle(res.data.title);
                 setImage(res.data.posterURL);
                 setSessions(res.data.days);
             })
@@ -64,6 +65,7 @@ export const Sessions = () => {
                     <p>{title}</p>                  
                 </MovieTitle>
             </FooterContainer>
+            <ButtonHome>Voltar</ButtonHome>
         </section>
     );
 };
@@ -131,4 +133,20 @@ const MovieTitle = styled.h3`
     p {
         font-size: 26px;
     }
+`;
+
+const ButtonHome = styled.button`
+    width: 83px;
+    height: 43px;
+    font-size: 18px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #393A73;
+    border: none;
+    border-radius: 3px;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 10px;
+    left: 0;
+    top: 0;
 `;
