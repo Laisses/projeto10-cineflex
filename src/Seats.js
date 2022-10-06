@@ -188,11 +188,10 @@ const Footer = styled.footer`
     height: 117px;
     background-color: #dfe6ed;
     border-top: 1px solid #9eadba;
-   /*  position: fixed;
+    position: fixed;
     bottom: 0;
-    right: 0; */
+    right: 0;
     margin-top: 30px;
-    margin-bottom: 500px;
 `;
 
 const Movie = styled.div`
