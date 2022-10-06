@@ -75,7 +75,7 @@ export const Seats = () => {
     return (
         <SeatsContainer>
             <Title>Selecione o(s) assento(s)</Title>
-            <SeatsChartContainer>
+            <SeatsMap>
                 {seatsMap.map(s =>
                     <Seat
                         key={s.id}
@@ -84,29 +84,29 @@ export const Seats = () => {
                         <div>{s.name}</div>
                     </Seat>
                 )}
-            </SeatsChartContainer>
-            <SeatContainer>
-                <Availability>
+            </SeatsMap>
+            <SeatChart>
+                <Div>
                     <SeatColor color={SEAT_STATUS.selected} />
                     <p>Selecionado</p>
-                </Availability>
-                <Availability>
+                </Div>
+                <Div>
                     <SeatColor color={SEAT_STATUS.available} />
                     <p>Disponível</p>
-                </Availability>
-                <Availability>
+                </Div>
+                <Div>
                     <SeatColor color={SEAT_STATUS.unavailable} />
                     <p>Indisponível</p>
-                </Availability>
-            </SeatContainer>
-            <FormContainer>
+                </Div>
+            </SeatChart>
+            <Form>
                 <label htmlFor="nome">Nome do comprador:</label>
                 <input type="text" id="nome" placeholder="Digite seu nome..." />
                 <label htmlFor="cpf">CPF do comprador:</label>
                 <input type="text" id="cpf" placeholder="Digite seu CPF..." />
                 <Button>Reservar assento(s)</Button>
-            </FormContainer>            
-            <FooterContainer>
+            </Form>            
+            <Footer>
                 <Movie>
                     <img src={image} alt={`Pôster do filme ${title}`} />
                 </Movie>
@@ -114,7 +114,7 @@ export const Seats = () => {
                     <p>{title}</p>
                     <p>{`${day} - ${time}`}</p>
                 </MovieTitle>
-            </FooterContainer>
+            </Footer>
         </SeatsContainer>
     );
 };
@@ -132,7 +132,7 @@ const Title = styled.h2`
     text-align: center;
 `;
 
-const SeatsChartContainer = styled.ul`
+const SeatsMap = styled.ul`
     display: flex;
     flex-wrap: wrap;
     margin: 0 24px;    
@@ -155,7 +155,7 @@ const Seat = styled.li`
     }
 `;
 
-const SeatContainer = styled.div`
+const SeatChart = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -163,7 +163,7 @@ const SeatContainer = styled.div`
     margin-bottom: 40px;
 `;
 
-const Availability = styled.div`
+const Div = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -192,7 +192,7 @@ const Button = styled.button`
     border-radius: 3px;
 `;
 
-const FormContainer = styled.div`
+const Form = styled.div`
     display: flex;
     flex-direction: column;
     label {        
@@ -216,7 +216,7 @@ const FormContainer = styled.div`
     }
 `;
 
-const FooterContainer = styled.footer`
+const Footer = styled.footer`
     display: flex;
     align-items: center;
     width: 100%;
