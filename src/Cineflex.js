@@ -5,7 +5,7 @@ import { Header } from "./Header";
 import { Movies } from "./Movies";
 import { Sessions } from "./Sessions";
 import { Seats } from "./Seats";
-import { Order } from "./Order";
+import { Sucess } from "./Sucess";
 
 export const Cineflex = () => {
 
@@ -17,7 +17,7 @@ export const Cineflex = () => {
                     <Route path="/" element={<Movies />} />
                     <Route path="/filme/:movieId" element={<Sessions />} />
                     <Route path="/sessao/:sessionId" element={<Seats />} />
-                    <Route path="/sucesso" element={<Order />} />
+                    <Route path="/sucesso" element={<Sucess />} />
                 </Routes>
             </BrowserRouter>
         </Container>
