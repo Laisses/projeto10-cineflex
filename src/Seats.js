@@ -125,6 +125,7 @@ export const Seats = () => {
 const SeatsContainer = styled.div`
     display: flex;
     flex-direction: column;
+    margin-top: 67px;
 `;
 
 const Title = styled.h2`

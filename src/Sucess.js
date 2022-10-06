@@ -47,6 +47,7 @@ export const Sucess = () => {
 const OrderContainer = styled.div`
     display: flex;
     flex-direction: column;
+    margin-top: 67px;
 `;
 
 const SucessMessage = styled.h2`
@@ -88,6 +89,4 @@ const Button = styled.button`
     background-color: #e8833a;
     border: none;
     border-radius: 3px;
-
-    margin-bottom: 600px;
 `;

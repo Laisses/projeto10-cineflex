@@ -15,6 +15,9 @@ const AppTitle = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
     h1 {
         color: #e8833a;
         font-size: 34px;

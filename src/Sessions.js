@@ -46,7 +46,7 @@ export const Sessions = () => {
     }
 
     return (
-        <section>
+        <Section>
             <Title>Selecione o horário</Title>
             <MovieContainer>
                 {sessions.map(s => <MovieSession
@@ -64,10 +64,14 @@ export const Sessions = () => {
                     <p>{title}</p>                  
                 </MovieTitle>
             </FooterContainer>
-            <ButtonHome onClick={() => navigate("/")}>Voltar</ButtonHome>
-        </section>
+            <ButtonBack onClick={() => navigate("/")}>Voltar</ButtonBack>
+        </Section>
     );
 };
+
+const Section = styled.section`
+    margin-top: 110px;
+`;
 
 const Title = styled.h2`    
     font-size: 24px;
@@ -134,7 +138,7 @@ const MovieTitle = styled.h3`
     }
 `;
 
-const ButtonHome = styled.button`
+const ButtonBack = styled.button`
     width: 83px;
     height: 43px;
     font-size: 18px;
@@ -143,7 +147,7 @@ const ButtonHome = styled.button`
     background-color: #393A73;
     border: none;
     border-radius: 3px;
-    position: absolute;
+    position: fixed;
     margin-top: 10px;
     margin-left: 10px;
     left: 0;
