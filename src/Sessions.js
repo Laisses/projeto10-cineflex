@@ -5,11 +5,12 @@ import axios from "axios";
 
 const MovieSession = ({ weekday, date, showtimes }) => {
     const navigate = useNavigate();
-    
+
     return (
         <>
-            <P>{weekday} - {date}</P>
+            <P data-identifier="session-date">{weekday} - {date}</P>
             {showtimes.map(s => <Button
+                data-identifier="hour-minute-btn"
                 key={s.id}
                 onClick={() => navigate(`/sessao/${s.id}`)}
             >
@@ -58,10 +59,10 @@ export const Sessions = () => {
             </MovieContainer>
             <FooterContainer>
                 <Movie>
-                    <img src={image} alt={`Pôster do filme ${title}`}/>
+                    <img data-identifier="movie-img-preview" src={image} alt={`Pôster do filme ${title}`} />
                 </Movie>
                 <MovieTitle>
-                    <p>{title}</p>                  
+                    <p data-identifier="movie-and-session-infos-preview">{title}</p>
                 </MovieTitle>
             </FooterContainer>
             <ButtonBack onClick={() => navigate("/")}>Voltar</ButtonBack>

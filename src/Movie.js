@@ -6,7 +6,7 @@ export const Movie = ({id, title, image}) => {
     const navigate = useNavigate();
 
     return (
-        <Li>
+        <Li data-identifier="movie-outdoor">
             <img src={image} alt={`Pôster do filme ${title}`} onClick={() => navigate(`/filme/${id}`)}/>
         </Li>
     );

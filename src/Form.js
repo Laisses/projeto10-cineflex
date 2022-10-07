@@ -7,7 +7,7 @@ export const Form = ({ seats, title, day, time }) => {
     const [name, setName] = useState("");
     const [cpf, setCpf] = useState("");
     const [loading, setLoading] = useState(false);
-    
+
     const navigate = useNavigate();
 
     const validateName = name => {
@@ -45,7 +45,7 @@ export const Form = ({ seats, title, day, time }) => {
                 name,
                 cpf,
             };
-           
+
             setLoading(true);
 
             axios.post(URL, order)
@@ -75,6 +75,7 @@ export const Form = ({ seats, title, day, time }) => {
         <FormStructure onSubmit={handleSubmit}>
             <label htmlFor="nome">Nome do comprador:</label>
             <input
+                data-identifier="buyer-name-input"
                 type="text"
                 id="nome"
                 required
@@ -84,6 +85,7 @@ export const Form = ({ seats, title, day, time }) => {
             />
             <label htmlFor="cpf">CPF do comprador:</label>
             <input
+                data-identifier="buyer-cpf-input"
                 type="text"
                 id="cpf"
                 required
@@ -94,7 +96,7 @@ export const Form = ({ seats, title, day, time }) => {
                 }}
                 placeholder="Digite seu CPF..."
             />
-            <Button>Reservar assento(s)</Button>
+            <Button data-identifier="reservation-btn">Reservar assento(s)</Button>
         </FormStructure>
     );
 };

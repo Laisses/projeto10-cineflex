@@ -81,6 +81,7 @@ export const Seats = () => {
             <SeatsMap>
                 {seatsMap.map(s =>
                     <Seat
+                        data-identifier="seat"
                         key={s.id}
                         onClick={() => handleSeat(s)}
                         color={chooseColor(s)}>
@@ -90,15 +91,15 @@ export const Seats = () => {
             </SeatsMap>
             <SeatChart>
                 <Div>
-                    <SeatColor color={SEAT_STATUS.selected} />
+                    <SeatColor data-identifier="seat-selected-subtitle" color={SEAT_STATUS.selected} />
                     <p>Selecionado</p>
                 </Div>
                 <Div>
-                    <SeatColor color={SEAT_STATUS.available} />
+                    <SeatColor data-identifier="seat-available-subtitle" color={SEAT_STATUS.available} />
                     <p>Disponível</p>
                 </Div>
                 <Div>
-                    <SeatColor color={SEAT_STATUS.unavailable} />
+                    <SeatColor data-identifier="seat-unavailable-subtitle" color={SEAT_STATUS.unavailable} />
                     <p>Indisponível</p>
                 </Div>
             </SeatChart>
@@ -113,8 +114,8 @@ export const Seats = () => {
                     <img src={image} alt={`Pôster do filme ${title}`} />
                 </Movie>
                 <MovieTitle>
-                    <p>{title}</p>
-                    <p>{`${weekday} - ${time}`}</p>
+                    <p data-identifier="movie-and-session-infos-preview">{title}</p>
+                    <p data-identifier="movie-and-session-infos-preview">{`${weekday} - ${time}`}</p>
                 </MovieTitle>
             </Footer>
             <ButtonBack onClick={() => navigate(-1)}>Voltar</ButtonBack>

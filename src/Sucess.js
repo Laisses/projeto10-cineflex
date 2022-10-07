@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export const Sucess = () => {
-    
+
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -24,22 +24,24 @@ export const Sucess = () => {
             </SucessMessage>
             <Info>
                 <InfoTitle>Filme e sessão</InfoTitle>
-                <Paragraph>{order.title}</Paragraph>
-                <Paragraph>{order.day} {order.time}</Paragraph>
-            </Info> 
+                <Paragraph data-identifier="movie-session-infos-reserve-finished">{order.title}</Paragraph>
+                <Paragraph data-identifier="movie-session-infos-reserve-finished">{order.day} {order.time}</Paragraph>
+            </Info>
             <Info>
                 <InfoTitle>Ingressos</InfoTitle>
-                {order.seats.map(s => <Paragraph key={s}>Assento {s}</Paragraph>)}
+                {order.seats.map(s => <Paragraph data-identifier="seat-infos-reserve-finished" key={s}>Assento {s}</Paragraph>)}
             </Info>
             <Info>
                 <InfoTitle>Comprador</InfoTitle>
-                <Paragraph>{order.name}</Paragraph>
-                <Paragraph>{order.cpf}</Paragraph>
+                <Paragraph data-identifier="buyer-infos-reserve-finished">{order.name}</Paragraph>
+                <Paragraph data-identifier="buyer-infos-reserve-finished">{order.cpf}</Paragraph>
             </Info>
-            <Button onClick={() => {
-                navigate("/")
-                window.location.reload();
-            }}>Voltar pra Home</Button>
+            <Button
+                data-identifier="back-to-home-btn"
+                onClick={() => {
+                    navigate("/")
+                    window.location.reload();
+                }}>Voltar pra Home</Button>
         </OrderContainer>
     );
 };
